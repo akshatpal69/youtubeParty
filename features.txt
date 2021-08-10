@@ -1,0 +1,33 @@
+//////want to do\\\\\\\\\\\
+
+focus
+ip address
+mute
+tab mute
+
+
+
+
+////////can do\\\\\\\\\\\\\\
+get inner height
+get inner width
+
+get outer height
+get outer width
+mouse wheel event
+mouse position
+
+record click events
+record keybord button presses
+
+screen : available height and width
+	orientation
+	pixel depth
+	x, y of top left corner of the window 
+	scroll location x, y
+	focus
+
+
+
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 512 512"
+   version="1.1"
+   sodipodi:docname="sync.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs11" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.0351562"
+     inkscape:cx="255.51698"
+     inkscape:cy="256.48302"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <title
+     id="title2">refresh-glyph</title>
+  <path
+     d="M66.71,287.91H0v160l47.36-43.59A255.71,255.71,0,0,0,255.9,512C386.54,512,494.19,414.15,510,287.91H445.29A192,192,0,0,1,95,360.6l79.08-72.69Zm0,0"
+     fill="#434040"
+     id="path4"
+     style="fill:#000000" />
+  <path
+     d="M255.9,0C125.46,0,17.64,97.63,2,224H66.71a192,192,0,0,1,353.26-68l-68,68H512v-160l-45.78,45.78A255.89,255.89,0,0,0,255.9,0Zm0,0"
+     fill="#434040"
+     id="path6"
+     style="fill:#000000" />
+</svg>

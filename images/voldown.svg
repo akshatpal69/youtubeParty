@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 512 512"
+   version="1.1"
+   sodipodi:docname="voldown.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs11" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.0351562"
+     inkscape:cx="255.51698"
+     inkscape:cy="256.48302"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <title
+     id="title2">decrease-volume-glyph</title>
+  <path
+     d="M117.42,371.57c0-.44,18.19,9.38,40.62,21.92L273.56,458.1c22.43,12.55,40.62,1.88,40.62-23.82V77.73C314.18,52,296,41.35,273.56,53.9L158,118.51c-22.44,12.55-40.62,22.36-40.62,21.92s-20.84-.8-46.55-.8H46.55C20.84,139.64,0,155,0,174V338c0,19,20.84,34.39,46.55,34.39H70.88C96.58,372.36,117.42,372,117.42,371.57Z"
+     fill="#434040"
+     id="path4"
+     style="fill:#000000" />
+  <path
+     d="M488.73,232.73H372.37a23.27,23.27,0,1,0,0,46.54H488.73a23.27,23.27,0,1,0,0-46.54Z"
+     fill="#434040"
+     id="path6"
+     style="fill:#000000" />
+</svg>

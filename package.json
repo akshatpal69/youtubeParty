@@ -1,0 +1,32 @@
+{
+  "name": "ytws",
+  "version": "1.0.0",
+  "main": "server.js",
+  "start": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "akshat",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshatpal-X8/youtubeParty.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akshatpal-X8/youtubeParty/issues"
+  },
+  "homepage": "https://github.com/akshatpal-X8/youtubeParty#readme",
+  "description": ""
+}

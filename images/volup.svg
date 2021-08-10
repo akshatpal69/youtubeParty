@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 512 512"
+   version="1.1"
+   sodipodi:docname="volup.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs11" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.0351562"
+     inkscape:cx="255.51698"
+     inkscape:cy="256.48302"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <title
+     id="title2">increase-glyph</title>
+  <path
+     d="M112,366.25c0-.42,17.35,8.94,38.75,20.92L261,448.81c21.4,12,38.76,1.8,38.76-22.73V85.92c0-24.52-17.35-34.7-38.76-22.73l-110.2,61.64c-21.4,12-38.75,21.34-38.75,20.92S92.14,145,67.62,145H44.41C19.88,145,0,159.68,0,177.79V334.21C0,352.32,19.88,367,44.41,367H67.62C92.14,367,112,366.67,112,366.25Z"
+     fill="#434040"
+     id="path4"
+     style="fill:#000000" />
+  <path
+     d="M445.39,233.8V189.39a22.2,22.2,0,1,0-44.4,0v44.4h-44.4a22.2,22.2,0,1,0,0,44.4H401v44.41a22.2,22.2,0,1,0,44.4,0V278.2h44.4a22.2,22.2,0,1,0,0-44.4Z"
+     fill="#434040"
+     id="path6"
+     style="fill:#000000" />
+</svg>
