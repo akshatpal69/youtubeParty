@@ -1,17 +1,42 @@
-/***************************************************************** LOCAL_STORAGE ********************************************************/
+/***************************************************************** Variables ********************************************************/
 let username;
 let identity;
-// let uid = '';
-// if (username == null || username == undefined) {
-//     uid = prompt("enter name");
-//     localStorage.setItem('Name', uid);
-// }
-// let identity = localStorage.getItem('Name');
-/***************************************************************** SOCKET.IO ************************************************************/
 let socket = io();
-
-
 let videoIdentity = prompt("Please enter the video ID", "o24QIHHJzyc");
+let firebaseConfig = {
+    apiKey: "AIzaSyA_IqKvFoEP78YY5SzU0S1eRIi1y-dyQvw",
+    authDomain: "learnfirebase-8bf03.firebaseapp.com",
+    databaseURL: "https://learnfirebase-8bf03.firebaseio.com",
+    projectId: "learnfirebase-8bf03",
+    storageBucket: "learnfirebase-8bf03.appspot.com",
+    messagingSenderId: "8432021767",
+    appId: "1:8432021767:web:9bf6a4aa80b9a98840d5a2",
+    measurementId: "G-5VCE2R946Z"
+};
+let messageBox = document.getElementById("message");
+let tag = document.createElement('script');
+let firstScriptTag = document.getElementsByTagName('script')[0];
+let player;
+let printStatus = document.getElementById('status');
+let pause = document.getElementById("pause");
+let play = document.getElementById("play");
+let stop = document.getElementById("stop");
+let time = document.getElementById("time");
+let plus5 = document.getElementById("plus5");
+let plus10 = document.getElementById("plus10");
+let plus15 = document.getElementById("plus15");
+let minus5 = document.getElementById("minus5");
+let minus10 = document.getElementById("minus10");
+let minus15 = document.getElementById("minus15");
+let customSeek = document.getElementById("customSeek");
+let ten = document.getElementById("ten");
+let thirty = document.getElementById("thirty");
+let sixty = document.getElementById("sixty");
+let ninty = document.getElementById("ninty");
+let syncBtn = document.getElementById("sync");
+let logs = document.getElementById("logs");
+/***************************************************************** SOCKET.IO ************************************************************/
+
 window.addEventListener("load", function (username) {
     username = localStorage.getItem('Name');
     let uid = '';
@@ -20,6 +45,7 @@ window.addEventListener("load", function (username) {
         localStorage.setItem('Name', uid);
     }
     identity = localStorage.getItem('Name');
+    console.log('identity set to: '+identity);
 });
 
 
@@ -27,6 +53,7 @@ window.addEventListener("load", function (username) {
 window.addEventListener("load", function (e) {
     e.preventDefault();
     socket.emit('identity', identity);
+    console.log('identity emitted')
 });
 window.addEventListener("load", function (e) {
     e.preventDefault();
@@ -103,24 +130,40 @@ socket.on('stop', (stop) => {
         stopVideo();
     }
 });
-socket.on('syncTime', (syncTime) => {
-    player.seekTo(syncTime, true)
+socket.on('syncTime', (syncTime, syncPress) => {
+    player.seekTo(syncTime, true);
+    let html;
+    html = "<li>"+ syncPress+"</li>";
+    logs.innerHTML += html;
 });
-
+socket.on('consoleData',(consoleData, user)=>{
+    console.log('datareceived')
+   
+    // let html = "";
+    // html += "<li id='log-messages'><b>"+consoleData+"<b></br>";
+    let connectedUsers = "";
+    connectedUsers= printObj(user);
+    document.getElementById("connectedUsers").innerHTML = connectedUsers;
+    // document.getElementById("logs").innerHTML += html;
+    function printObj(user) {
+      console.log('  printUser fncalled')
+        var string = '';
+        for(var key in user) {
+            if(typeof user[key] == 'string') {
+                string+= user[key] + '</br>';
+            }
+            else {
+                string+= user[key] + '</br>';
+            }
+        }
+        return string;
+    }
+})
 /********************************************************* FIREBASE *******************************************************************/
 
-let firebaseConfig = {
-    apiKey: "AIzaSyA_IqKvFoEP78YY5SzU0S1eRIi1y-dyQvw",
-    authDomain: "learnfirebase-8bf03.firebaseapp.com",
-    databaseURL: "https://learnfirebase-8bf03.firebaseio.com",
-    projectId: "learnfirebase-8bf03",
-    storageBucket: "learnfirebase-8bf03.appspot.com",
-    messagingSenderId: "8432021767",
-    appId: "1:8432021767:web:9bf6a4aa80b9a98840d5a2",
-    measurementId: "G-5VCE2R946Z"
-};
+
 firebase.initializeApp(firebaseConfig);
-let messageBox = document.getElementById("message");
+
 messageBox.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         console.log('enter pressed')
@@ -137,11 +180,7 @@ messageBox.addEventListener('keypress', (e) => {
         return false;
     }
 });
-function scrollToBottom(id) {
-    let div = document.getElementById(id);
-    div.scrollTop = div.scrollHeight - div.clientHeight;
-    console.log('scrollToBottom executed');
-}
+
 // listen for incoming messages
 firebase.database().ref("messages").on("child_added", function (snapshot) {
     let html = "";
@@ -155,12 +194,12 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 /*********************************************************** YOUTUBE ********************************************************************/
 
 document.getElementById("player").src = "https://www.youtube.com/embed/" + videoIdentity + "?enablejsapi=1"; //&autoplay=1
-let tag = document.createElement('script');
+console.log('video idetity set to:'+videoIdentity)
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
-let firstScriptTag = document.getElementsByTagName('script')[0];
+
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-let player;
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         events: {
@@ -169,95 +208,100 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
-let printStatus = document.getElementById('status');
-let pause = document.getElementById("pause");
-let play = document.getElementById("play");
-let stop = document.getElementById("stop");
-let time = document.getElementById("time");
-let plus5 = document.getElementById("plus5");
-let plus10 = document.getElementById("plus10");
-let plus15 = document.getElementById("plus15");
-let minus5 = document.getElementById("minus5");
-let minus10 = document.getElementById("minus10");
-let minus15 = document.getElementById("minus15");
-let customSeek = document.getElementById("customSeek");
-let ten = document.getElementById("ten");
-let thirty = document.getElementById("thirty");
-let sixty = document.getElementById("sixty");
-let ninty = document.getElementById("ninty");
-let syncBtn = document.getElementById("sync");
+let controlIdentity = localStorage.getItem('Name');
 syncBtn.addEventListener("click", function () {
+    console.log('sync event invoked')
     let syncTime = Math.round(player.getCurrentTime());
-    socket.emit('syncTime', syncTime);
-    console.log(player.setVolume(25));
+    console.log('synced');
+    let syncPress = controlIdentity+" pressed syncbutton";
+    socket.emit('syncTime', syncTime, syncPress);
 });
 plus5.addEventListener("click", () => {
+    console.log('plus5 event invoked')
     socket.emit('seekPlus5', 'seekPlus5');
 });
 plus10.addEventListener("click", () => {
+    console.log('plus10 event invoked')
     socket.emit('seekPlus10', 'seekPlus10');
 });
 plus15.addEventListener("click", () => {
+    console.log('plus15 event invoked')
     socket.emit('seekPlus15', 'seekPlus15');
 });
 minus5.addEventListener("click", () => {
+    console.log('minus5 event invoked')
     socket.emit('seekMinus5', 'seekMinus5');
 });
 minus10.addEventListener("click", () => {
+    console.log('minus10 event invoked')
     socket.emit('seekMinus10', 'seekMinus10');
 });
 minus15.addEventListener("click", () => {
+    console.log('minus15 event invoked')
     socket.emit('seekMinus15', 'seekMinus15');
 });
 customSeek.addEventListener('keypress', function (e) {
+    console.log('customseek event invoked')
     let customSeekValue = customSeek.value;
     if (e.key === 'Enter') {
         socket.emit('customSeek', customSeekValue);
     }
 });
 ten.addEventListener("click", () => {
+    console.log('tenthPart event invoked')
     socket.emit('tenthPart', 'tenthPart');
 });
 thirty.addEventListener("click", () => {
+    console.log('thirtiethPart event invoked')
     socket.emit('thirtiethPart', 'thirtiethPart');
 });
 sixty.addEventListener("click", () => {
+    console.log('sixtiethPart event invoked')
     socket.emit('sixtiethPart', 'sixtiethPart');
 });
 ninty.addEventListener("click", () => {
+    console.log('nintiethPart event invoked')
     socket.emit('nintiethPart', 'nintiethPart');
 });
 pause.addEventListener("click", function () {
+    console.log('pause event invoked')
     socket.emit('pause', 'pause');
 });
 play.addEventListener("click", function () {
+    console.log('play event invoked')
     socket.emit('play', 'play');
 });
 stop.addEventListener("click", function () {
+    console.log('stop event invoked')
     socket.emit('stop', 'stop');
-    //printStatus.innerHTML = "stopped";
+    printStatus.innerHTML = "stopped";
 });
 function tenthPartfn() {
     let tenth = player.getDuration() / 10;
     player.seekTo(tenth, true)
+    console.log('tenthPartfn function executed')
 }
 function thirtiethPartfn() {
     let tenth = player.getDuration() / 10;
     let thirtieth = tenth * 3;
     player.seekTo(thirtieth, true)
+    console.log('thirtiethPartfn function executed')
 }
 function sixtiethPartfn() {
     let tenth = player.getDuration() / 10;
     let sixtieth = tenth * 6;
     player.seekTo(sixtieth, true)
+    console.log('sixtiethPartfn function executed')
 }
 function nintiethPartfn() {
     let tenth = player.getDuration() / 10;
     let nintieth = tenth * 9;
     player.seekTo(nintieth, true)
+    console.log('nintiethPartfn function executed')
 }
 function onPlayerReady(event) {
     document.getElementById('player').style.borderColor = '#FF6D00';
+    
 }
 function changeBorderColor(playerStatus) {
     let color;
@@ -287,31 +331,46 @@ function onPlayerStateChange(event) {
 }
 function pauseVideo() {
     player.pauseVideo();
+    console.log('pauseVideo function executed')
 }
 function playVideo() {
     player.playVideo();
+    console.log('playVideo function executed')
 }
 function stopVideo() {
     player.stopVideo();
+    console.log('stopVideo function executed')
 }
 function plus5fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 5), true)
+    console.log('plus5fn function executed')
 }
 function plus10fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 10), true)
+    console.log('plus15fn function executed')
 }
 function plus15fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 15), true)
+    console.log('plus15fn function executed')
 }
 function minus5fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 5), true)
+    console.log('minus5fn function executed')
 }
 function minus10fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 10), true)
+    console.log('minus10fn function executed')
 }
 function minus15fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 15), true)
+    console.log('minus15fn function executed')
 }
 function customSeekfn(value) {
     player.seekTo(Math.round(value), true);
+    console.log('customSeekfn function executed')
+}
+function scrollToBottom(id) {
+    let div = document.getElementById(id);
+    div.scrollTop = div.scrollHeight - div.clientHeight;
+    console.log('scrollToBottom executed');
 }

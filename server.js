@@ -4,23 +4,32 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-const port = process.env.PORT || 6688;
+const port = process.env.PORT || 3003;
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 app.use(express.static(__dirname));
 
 let naam;
 let naam2;
+// let connectedusers;
+let user = {};
 io.on('connection', (socket) => {
      socket.on('identity', (id) => {
          naam = id;
          console.log(id+': '+'connected');
+         let consoleData = id+': '+'connected';
+         user[id]=id;
+         setTimeout(function(){ io.emit('consoleData', consoleData, user); }, 3000);
      });
      naam = naam2;
      socket.on('disconnect', () => {
          console.log(naam+': '+'disconnected');
+         let consoleData = naam+': '+'disconnected';
+         console.log("deleted user:"+user[naam])
+         delete user[naam];
+         io.emit('consoleData', consoleData,user);
      });
     socket.on('seekPlus5', (seekPlus5)=>{
         io.emit('seekPlus5',seekPlus5)
@@ -41,8 +50,8 @@ io.on('connection', (socket) => {
         io.emit('seekMinus15',seekMinus15)
     });
     socket.on('customSeek', (customSeek)=>{
-        console.log(customSeek);
         io.emit('customSeek',customSeek)
+        
     });
     socket.on('tenthPart', (tenthPart)=>{
         io.emit('tenthPart',tenthPart)
@@ -65,8 +74,8 @@ io.on('connection', (socket) => {
     socket.on('stop', (stop)=>{
         io.emit('stop',stop)
     });
-    socket.on('syncTime', (syncTime)=>{
-        io.emit('syncTime',syncTime)
+    socket.on('syncTime', (syncTime, syncPress)=>{
+        io.emit('syncTime',syncTime, syncPress);
     });     
  });
 
