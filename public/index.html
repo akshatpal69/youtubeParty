@@ -16,38 +16,42 @@
             class="ytinputlink" value="youtubePartyV1.0.3_Beta" name="ytinputlink" >
         </div>
         <div class="body">
-            
             <div class="mainContent">
-                <iframe id="player" class="player"   frameborder="0">
-                </iframe>
-                    <div class="controls">
-                        <input type="image" title="Sync Video" src="images/sync.svg" style="height: 20px; width: 30px;" id="sync" name="sync">
-                        <input type="image" title="Pause" src="/images/pause.svg" style="height: 20px; width: 30px;" id="pause" name="pause">
-                        <input type="image" title="Play" src="/images/play.svg" style="height: 20px; width: 30px;" id="play" name="play">
-                        <input type="image" title="Stop" src="/images/stop.svg" style=" height: 20px; width: 30px;" id="stop" name="stop">
-                        <input type="button" title="Seek to 10%" value="10%" id="ten" name="ten">
-                        <input type="button" title="Seek to 30%" value="30%" id="thirty" name="thirty">
-                        <input type="button" title="Seek to 60%" value="60%" id="sixty" name="sixty">
-                        <input type="button" title="Seek to 90%" value="90%" id="ninty" name="ninty">
-                        <input type="image" title="minus15seconds" src="/images/minus15seconds.svg" style=" height: 20px; width: 30px;" id="minus15" name="minus15">
-                        <input type="image" title="minus10seconds" src="/images/minus10seconds.svg" style=" height: 20px; width: 30px;" id="minus10" name="minus10">
-                        <input type="image" title="minus5seconds" src="/images/minus5seconds.svg" style=" height: 20px; width: 30px;" id="minus5" name="minus5">
-                        <input type="image" title="plus5seconds" src="/images/plus5seconds.svg" style=" height: 20px; width: 30px;" id="plus5" name="plus5">
-                        <input type="image" title="plus10seconds" src="/images/plus10seconds.svg" style=" height: 20px; width: 30px;" id="plus10" name="plus10">
-                        <input type="image" title="plus15seconds" src="/images/plus15seconds.svg" style=" height: 20px; width: 30px;" id="plus15" name="plus15">
-                        <input type="text" title="enter value in seconds"  class="customSeek" autocomplete="off" placeholder="enter time in seconds to seek" id="customSeek" name="customSeek">
-                        <div id="status"></div>
-                    </div> 
+                <iframe id="player" class="player" frameborder="0"></iframe>
+                <div class="controls">
+                    <input type="image" title="Sync Video" src="images/sync.svg" style="height: 20px; width: 30px;" id="sync" name="sync">
+                    <input type="image" title="Pause" src="/images/pause.svg" style="height: 20px; width: 30px;" id="pause" name="pause">
+                    <input type="image" title="Play" src="/images/play.svg" style="height: 20px; width: 30px;" id="play" name="play">
+                    <input type="image" title="Stop" src="/images/stop.svg" style=" height: 20px; width: 30px;" id="stop" name="stop">
+                    <input type="button" title="Seek to 10%" value="10%" id="ten" name="ten">
+                    <input type="button" title="Seek to 30%" value="30%" id="thirty" name="thirty">
+                    <input type="button" title="Seek to 60%" value="60%" id="sixty" name="sixty">
+                    <input type="button" title="Seek to 90%" value="90%" id="ninty" name="ninty">
+                    <input type="image" title="minus15seconds" src="/images/minus15seconds.svg" style=" height: 20px; width: 30px;" id="minus15" name="minus15">
+                    <input type="image" title="minus10seconds" src="/images/minus10seconds.svg" style=" height: 20px; width: 30px;" id="minus10" name="minus10">
+                    <input type="image" title="minus5seconds" src="/images/minus5seconds.svg" style=" height: 20px; width: 30px;" id="minus5" name="minus5">
+                    <input type="image" title="plus5seconds" src="/images/plus5seconds.svg" style=" height: 20px; width: 30px;" id="plus5" name="plus5">
+                    <input type="image" title="plus10seconds" src="/images/plus10seconds.svg" style=" height: 20px; width: 30px;" id="plus10" name="plus10">
+                    <input type="image" title="plus15seconds" src="/images/plus15seconds.svg" style=" height: 20px; width: 30px;" id="plus15" name="plus15">
+                    <input type="text" title="enter value in seconds"  class="customSeek" autocomplete="off" placeholder="enter time in seconds to seek" id="customSeek" name="customSeek">
+                    <div id="status"></div>
+                    <p>connectedUsers</p>
+                    <div id="connectedUsers-wrapper">
+                        <ul id="connectedUsers">
+
+                        </ul>
+                    </div>
+                </div> 
             </div>
             <div class="messagesModule" id="messageModule">
                 <ul class="messages" id="messages"></ul>
                 <input type="text" class="messageInputBox" id="message" placeholder="Enter message" autocomplete="off">
             </div>
+
             <div class="logs-wrapper" id="logs-wrapper">
-                <p>connectedUsers</p>
-                <div id="connectedUsers"></div>
                 <ul class="logs" id="logs"></ul>
             </div>
+
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
