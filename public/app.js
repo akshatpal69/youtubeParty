@@ -190,14 +190,14 @@ socket.on('consoleData', (consoleData, user) => {
     // html += "<li id='log-messages'><b>"+consoleData+"<b></br>";
     let connectedUsers = "";
     connectedUsers = printObj(user);
-    document.getElementById("connectedUsers").innerHTML = "<li>"+ "%20"+connectedUsers+"</li>";
+    document.getElementById("connectedUsers").innerHTML = "<li>"+connectedUsers+"</li>";
     // document.getElementById("logs").innerHTML += html;
     function printObj(user) {
         console.log('  printUser fncalled')
         var string = '';
         for (var key in user) {
             if (typeof user[key] == 'string') {
-                string += user[key];
+                string += user[key]+" ";
             }
             else {
                 string += user[key];
