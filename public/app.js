@@ -45,7 +45,7 @@ window.addEventListener("load", function (username) {
         localStorage.setItem('Name', uid);
     }
     identity = localStorage.getItem('Name');
-    console.log('identity set to: '+identity);
+    console.log('identity set to: ' + identity);
 });
 
 
@@ -62,98 +62,145 @@ window.addEventListener("load", function (e) {
     }, 2500);
 });
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-socket.on('seekPlus5', (seekPlus5) => {
+socket.on('seekPlus5', (seekPlus5, plus5Press) => {
     if (seekPlus5 == 'seekPlus5') {
+        let html;
+        html = "<li>" + plus5Press + "</li>";
+        logs.innerHTML += html;
         plus5fn();
     }
 });
-socket.on('seekPlus10', (seekPlus10) => {
+socket.on('seekPlus10', (seekPlus10, plus10Press) => {
     if (seekPlus10 == 'seekPlus10') {
+        let html;
+        html = "<li>" + plus10Press + "</li>";
+        logs.innerHTML += html;
         plus10fn();
     }
 });
-socket.on('seekPlus15', (seekPlus15) => {
+socket.on('seekPlus15', (seekPlus15, plus15Press) => {
     if (seekPlus15 == 'seekPlus15') {
+        let html;
+        html = "<li>" + plus15Press + "</li>";
+        logs.innerHTML += html;
         plus15fn();
     }
 });
-socket.on('seekMinus5', (seekMinus5) => {
+socket.on('seekMinus5', (seekMinus5, minus5Press) => {
     if (seekMinus5 == 'seekMinus5') {
+        let html;
+        html = "<li>" + minus5Press + "</li>";
+        logs.innerHTML += html;
         minus5fn();
+
     }
 });
-socket.on('seekMinus10', (seekMinus10) => {
+socket.on('seekMinus10', (seekMinus10, minus10Press) => {
     if (seekMinus10 == 'seekMinus10') {
+        let html;
+        html = "<li>" + minus10Press + "</li>";
+        logs.innerHTML += html;
         minus10fn();
     }
 });
-socket.on('seekMinus15', (seekMinus15) => {
+socket.on('seekMinus15', (seekMinus15, minus15Press) => {
     if (seekMinus15 == 'seekMinus15') {
+        let html;
+        html = "<li>" + minus15Press + "</li>";
+        logs.innerHTML += html;
         minus15fn();
     }
 });
-socket.on('customSeek', (customSeekValue) => {
+socket.on('customSeek', (customSeekValue, customSeekLog) => {
+    let html;
+    html = "<li>" + customSeekLog + "</li>";
+    logs.innerHTML += html;
     customSeekfn(customSeekValue);
 });
-socket.on('tenthPart', (tenthPart) => {
+socket.on('tenthPart', (tenthPart, percentSeekLog) => {
     if (tenthPart == 'tenthPart') {
+        let html;
+        html = "<li>" + percentSeekLog + "</li>";
+        logs.innerHTML += html;
+        customSeekfn(customSeekValue);
         tenthPartfn();
     }
 });
-socket.on('thirtiethPart', (thirtiethPart) => {
+socket.on('thirtiethPart', (thirtiethPart, percentSeekLog) => {
     if (thirtiethPart == 'thirtiethPart') {
+        let html;
+        html = "<li>" + percentSeekLog + "</li>";
+        logs.innerHTML += html;
+        customSeekfn(customSeekValue);
         thirtiethPartfn();
     }
 });
-socket.on('sixtiethPart', (sixtiethPart) => {
+socket.on('sixtiethPart', (sixtiethPart, percentSeekLog) => {
     if (sixtiethPart == 'sixtiethPart') {
+        let html;
+        html = "<li>" + percentSeekLog + "</li>";
+        logs.innerHTML += html;
+        customSeekfn(customSeekValue);
         sixtiethPartfn();
     }
 });
-socket.on('nintiethPart', (nintiethPart) => {
+socket.on('nintiethPart', (nintiethPart, percentSeekLog) => {
     if (nintiethPart == 'nintiethPart') {
+        let html;
+        html = "<li>" + percentSeekLog + "</li>";
+        logs.innerHTML += html;
+        customSeekfn(customSeekValue);
         nintiethPartfn();
     }
 });
-socket.on('pause', (pause) => {
+socket.on('pause', (pause, pauseLog) => {
     if (pause == 'pause') {
+        let html;
+        html = "<li>" + pauseLog + "</li>";
+        logs.innerHTML += html;
         pauseVideo();
     }
 });
-socket.on('play', (play) => {
+socket.on('play', (play, playLog) => {
     if (play == 'play') {
+        let html;
+        html = "<li>" + playLog + "</li>";
+        logs.innerHTML += html;
         playVideo();
     }
 });
-socket.on('stop', (stop) => {
+socket.on('stop', (stop, stopLog) => {
     if (stop == 'stop') {
+        let html;
+        html = "<li>" + stopLog + "</li>";
+        logs.innerHTML += html;
         stopVideo();
     }
 });
 socket.on('syncTime', (syncTime, syncPress) => {
     player.seekTo(syncTime, true);
     let html;
-    html = "<li>"+ syncPress+"</li>";
+    html = "<li>" + syncPress + "</li>";
     logs.innerHTML += html;
 });
-socket.on('consoleData',(consoleData, user)=>{
+socket.on('consoleData', (consoleData, user) => {
     console.log('datareceived')
-   
+
     // let html = "";
     // html += "<li id='log-messages'><b>"+consoleData+"<b></br>";
     let connectedUsers = "";
-    connectedUsers= printObj(user);
+    connectedUsers = printObj(user);
     document.getElementById("connectedUsers").innerHTML = connectedUsers;
     // document.getElementById("logs").innerHTML += html;
     function printObj(user) {
-      console.log('  printUser fncalled')
+        console.log('  printUser fncalled')
         var string = '';
-        for(var key in user) {
-            if(typeof user[key] == 'string') {
-                string+= user[key] + '</br>';
+        for (var key in user) {
+            if (typeof user[key] == 'string') {
+                string += user[key] + '</br>';
             }
             else {
-                string+= user[key] + '</br>';
+                string += user[key] + '</br>';
             }
         }
         return string;
@@ -194,7 +241,7 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 /*********************************************************** YOUTUBE ********************************************************************/
 
 document.getElementById("player").src = "https://www.youtube.com/embed/" + videoIdentity + "?enablejsapi=1&autoplay=1"; //&autoplay=1
-console.log('video idetity set to:'+videoIdentity)
+console.log('video idetity set to:' + videoIdentity)
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
 
@@ -213,67 +260,82 @@ syncBtn.addEventListener("click", function () {
     console.log('sync event invoked')
     let syncTime = Math.round(player.getCurrentTime());
     console.log('synced');
-    let syncPress = controlIdentity+" pressed syncbutton";
+    let syncPress = controlIdentity + " pressed syncbutton";
     socket.emit('syncTime', syncTime, syncPress);
 });
 plus5.addEventListener("click", () => {
     console.log('plus5 event invoked')
-    socket.emit('seekPlus5', 'seekPlus5');
+    let plus5Press = controlIdentity + " seeked +5 seconds";
+    socket.emit('seekPlus5', 'seekPlus5', plus5Press);
 });
 plus10.addEventListener("click", () => {
     console.log('plus10 event invoked')
-    socket.emit('seekPlus10', 'seekPlus10');
+    let plus10Press = controlIdentity + " seeked +10 seconds";
+    socket.emit('seekPlus10', 'seekPlus10', plus10Press);
 });
 plus15.addEventListener("click", () => {
     console.log('plus15 event invoked')
-    socket.emit('seekPlus15', 'seekPlus15');
+    let plus15Press = controlIdentity + " seeked +15 seconds";
+    socket.emit('seekPlus15', 'seekPlus15', plus15Press);
 });
 minus5.addEventListener("click", () => {
     console.log('minus5 event invoked')
-    socket.emit('seekMinus5', 'seekMinus5');
+    let minus5Press = controlIdentity + " seeked -5 seconds";
+    socket.emit('seekMinus5', 'seekMinus5', minus5Press);
 });
 minus10.addEventListener("click", () => {
     console.log('minus10 event invoked')
-    socket.emit('seekMinus10', 'seekMinus10');
+    let minus10Press = controlIdentity + " seeked -10 seconds";
+    socket.emit('seekMinus10', 'seekMinus10', minus10Press);
 });
 minus15.addEventListener("click", () => {
     console.log('minus15 event invoked')
-    socket.emit('seekMinus15', 'seekMinus15');
+    let minus15Press = controlIdentity + " seeked -15 seconds";
+    socket.emit('seekMinus15', 'seekMinus15', minus15Press);
 });
 customSeek.addEventListener('keypress', function (e) {
     console.log('customseek event invoked')
     let customSeekValue = customSeek.value;
+    let customSeekLog = controlIdentity + " seeked to " + customSeekValue + " seconds";
     if (e.key === 'Enter') {
-        socket.emit('customSeek', customSeekValue);
+        socket.emit('customSeek', customSeekValue, customSeekLog);
+        customSeek.value = '';
     }
 });
 ten.addEventListener("click", () => {
     console.log('tenthPart event invoked')
-    socket.emit('tenthPart', 'tenthPart');
+    let percentSeekLog = controlIdentity + " seeked to 10% of the video";
+    socket.emit('tenthPart', 'tenthPart', percentSeekLog);
 });
 thirty.addEventListener("click", () => {
     console.log('thirtiethPart event invoked')
-    socket.emit('thirtiethPart', 'thirtiethPart');
+    let percentSeekLog = controlIdentity + " seeked to 30% of the video";
+    socket.emit('thirtiethPart', 'thirtiethPart', percentSeekLog);
 });
 sixty.addEventListener("click", () => {
     console.log('sixtiethPart event invoked')
-    socket.emit('sixtiethPart', 'sixtiethPart');
+    let percentSeekLog = controlIdentity + " seeked to 60% of the video";
+    socket.emit('sixtiethPart', 'sixtiethPart', percentSeekLog);
 });
 ninty.addEventListener("click", () => {
     console.log('nintiethPart event invoked')
-    socket.emit('nintiethPart', 'nintiethPart');
+    let percentSeekLog = controlIdentity + " seeked to 90% of the video";
+    socket.emit('nintiethPart', 'nintiethPart', percentSeekLog);
 });
 pause.addEventListener("click", function () {
     console.log('pause event invoked')
-    socket.emit('pause', 'pause');
+    let pauseLog = controlIdentity + " paused the video";
+    socket.emit('pause', 'pause', pauseLog);
 });
 play.addEventListener("click", function () {
     console.log('play event invoked')
-    socket.emit('play', 'play');
+    let playLog = controlIdentity + " played the video";
+    socket.emit('play', 'play', playLog);
 });
 stop.addEventListener("click", function () {
     console.log('stop event invoked')
-    socket.emit('stop', 'stop');
+    let stopLog = controlIdentity + " stopped the video";
+    socket.emit('stop', 'stop', stopLog);
     printStatus.innerHTML = "stopped";
 });
 function tenthPartfn() {
@@ -301,7 +363,7 @@ function nintiethPartfn() {
 }
 function onPlayerReady(event) {
     document.getElementById('player').style.borderColor = '#FF6D00';
-    
+
 }
 function changeBorderColor(playerStatus) {
     let color;
