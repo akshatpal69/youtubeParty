@@ -242,6 +242,7 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 
 document.getElementById("player").src = "https://www.youtube.com/embed/" + videoIdentity + "?enablejsapi=1&autoplay=1"; //&autoplay=1
 console.log('video idetity set to:' + videoIdentity)
+console.log('video idetity set to:'+videoIdentity)
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
 
