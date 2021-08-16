@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404:notFound</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/style.css">
+</head>
+
+<body>
+    <img class="notFoundImg" src="/images/facepalm.png" alt="404">
+
+
+
+    <h1 class="notFoundH1">
+        oops, you messedUp,<br> anyways I'm sorry for your mistake</h1>
+    <img src="/images/pleadingFace.png" class="notFoundImg pleadingFace" alt="pleadingFace">
+    <img src="/images/sorryBow.png" class="notFoundImg pleadingFace" alt="sorry">
+    redirecting you to homePage in <span id="seconds"></span>
+    <script>
+
+        let secondsDisplay = document.getElementById('seconds');
+        
+        secondsDisplay.innerHTML = 5;
+        let time = 1;
+            let displayValue = 5;
+                // secondsDisplay.innerHTML = time;
+                for(time; time<6; time++){
+                    startTimer(time);
+                }
+            
+                
+                function minus1(){
+                    displayValue -= 1;
+                    return displayValue;
+                }
+            function startTimer(time){
+                
+                        setTimeout(() => {
+                        
+                        secondsDisplay.innerHTML = minus1();
+                        console.log(time)
+                    }, 1000*time);
+                    
+                    }
+                    setTimeout(() => {
+                        window.location.replace("http://localhost:3003/login")
+                    }, 5000);
+
+    </script>
+
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 let username;
 let identity;
 let socket = io();
-let videoIdentity = prompt("Please enter the video ID", "o24QIHHJzyc");
+let videoIdentity = prompt("Please enter the video ID", "U6RTV7eNrj4");
 let firebaseConfig = {
     apiKey: "AIzaSyA_IqKvFoEP78YY5SzU0S1eRIi1y-dyQvw",
     authDomain: "learnfirebase-8bf03.firebaseapp.com",
@@ -13,6 +13,8 @@ let firebaseConfig = {
     appId: "1:8432021767:web:9bf6a4aa80b9a98840d5a2",
     measurementId: "G-5VCE2R946Z"
 };
+let controlIdentity = localStorage.getItem('Name');
+//let videoIdRefined = videoIdentity;
 let messageBox = document.getElementById("message");
 let tag = document.createElement('script');
 let firstScriptTag = document.getElementsByTagName('script')[0];
@@ -35,6 +37,8 @@ let sixty = document.getElementById("sixty");
 let ninty = document.getElementById("ninty");
 let syncBtn = document.getElementById("sync");
 let logs = document.getElementById("logs");
+let ytinputlink = document.getElementById("ytinputlink");
+
 /***************************************************************** SOCKET.IO ************************************************************/
 
 window.addEventListener("load", function (username) {
@@ -122,7 +126,7 @@ socket.on('tenthPart', (tenthPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        customSeekfn(customSeekValue);
+        
         tenthPartfn();
     }
 });
@@ -131,7 +135,7 @@ socket.on('thirtiethPart', (thirtiethPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        customSeekfn(customSeekValue);
+        
         thirtiethPartfn();
     }
 });
@@ -140,7 +144,6 @@ socket.on('sixtiethPart', (sixtiethPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        customSeekfn(customSeekValue);
         sixtiethPartfn();
     }
 });
@@ -149,7 +152,6 @@ socket.on('nintiethPart', (nintiethPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        customSeekfn(customSeekValue);
         nintiethPartfn();
     }
 });
@@ -190,14 +192,14 @@ socket.on('consoleData', (consoleData, user) => {
     // html += "<li id='log-messages'><b>"+consoleData+"<b></br>";
     let connectedUsers = "";
     connectedUsers = printObj(user);
-    document.getElementById("connectedUsers").innerHTML = "<li>"+connectedUsers+"</li>";
+    document.getElementById("connectedUsers").innerHTML = "<li>" + connectedUsers + "</li>";
     // document.getElementById("logs").innerHTML += html;
     function printObj(user) {
         console.log('  printUser fncalled')
         var string = '';
         for (var key in user) {
             if (typeof user[key] == 'string') {
-                string += user[key]+" ";
+                string += user[key] + " ";
             }
             else {
                 string += user[key];
@@ -242,13 +244,13 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 
 document.getElementById("player").src = "https://www.youtube.com/embed/" + videoIdentity + "?enablejsapi=1&autoplay=1"; //&autoplay=1
 console.log('video idetity set to:' + videoIdentity)
-console.log('video idetity set to:'+videoIdentity)
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
 
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubeIframeAPIReady() {
+    console.log("player loaded")
     player = new YT.Player('player', {
         events: {
             'onReady': onPlayerReady,
@@ -256,7 +258,18 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
-let controlIdentity = localStorage.getItem('Name');
+
+// ytinputlink.addEventListener('keypress', function (e) {
+//     console.log('ytinputlink event invoked')
+//     if (e.key === 'Enter') {
+//         if (videoIdRefined.includes('https://www.youtube.com/watch?v=')) {
+//             videoIdRefined = videoIdentity.substring(32, 44);
+//             console.log(videoIdRefined);
+//         }
+//     }
+// });
+
+
 syncBtn.addEventListener("click", function () {
     console.log('sync event invoked')
     let syncTime = Math.round(player.getCurrentTime());
@@ -343,24 +356,28 @@ function tenthPartfn() {
     let tenth = player.getDuration() / 10;
     player.seekTo(tenth, true)
     console.log('tenthPartfn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function thirtiethPartfn() {
     let tenth = player.getDuration() / 10;
     let thirtieth = tenth * 3;
     player.seekTo(thirtieth, true)
     console.log('thirtiethPartfn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function sixtiethPartfn() {
     let tenth = player.getDuration() / 10;
     let sixtieth = tenth * 6;
     player.seekTo(sixtieth, true)
     console.log('sixtiethPartfn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function nintiethPartfn() {
     let tenth = player.getDuration() / 10;
     let nintieth = tenth * 9;
     player.seekTo(nintieth, true)
     console.log('nintiethPartfn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function onPlayerReady(event) {
     document.getElementById('player').style.borderColor = '#FF6D00';
@@ -395,42 +412,52 @@ function onPlayerStateChange(event) {
 function pauseVideo() {
     player.pauseVideo();
     console.log('pauseVideo function executed')
+    scrollToBottom('logs-wrapper');
 }
 function playVideo() {
     player.playVideo();
     console.log('playVideo function executed')
+    scrollToBottom('logs-wrapper');
 }
 function stopVideo() {
     player.stopVideo();
     console.log('stopVideo function executed')
+    scrollToBottom('logs-wrapper');
 }
 function plus5fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 5), true)
     console.log('plus5fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function plus10fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 10), true)
     console.log('plus15fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function plus15fn() {
     player.seekTo(Math.round(player.getCurrentTime() + 15), true)
     console.log('plus15fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function minus5fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 5), true)
     console.log('minus5fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function minus10fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 10), true)
     console.log('minus10fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function minus15fn() {
     player.seekTo(Math.round(player.getCurrentTime() - 15), true)
     console.log('minus15fn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function customSeekfn(value) {
     player.seekTo(Math.round(value), true);
     console.log('customSeekfn function executed')
+    scrollToBottom('logs-wrapper');
 }
 function scrollToBottom(id) {
     let div = document.getElementById(id);

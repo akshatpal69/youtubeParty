@@ -6,11 +6,22 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 3003;
 
+
+
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/public/login.html');
+});
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/public/register.html');
+});
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
-app.use(express.static(__dirname));
 
+app.use(express.static(__dirname));
+app.use(function (req, res, next) {
+    res.status(404).sendFile(__dirname + '/public/notFound.html')
+  });
 let naam;
 let naam2;
 // let connectedusers;
