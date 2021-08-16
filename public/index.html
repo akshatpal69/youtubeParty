@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/images/favicon.ico" type="image/ico" />
+    <link rel="icon" href="/images/dropLogo.png" type="image/ico" />
     <title>Youtube Partyy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/public/style.css">
+    
 </head>
 <body>
     <div class="container">
         <div class="header">
             <input type="text" disabled id="ytinputlink" 
             class="ytinputlink" value="youtubePartyV1.0.3_Beta" name="ytinputlink" >
+            <input type="image"  id="logoutImg" class="logoutImg" src="/images/logout.png" alt="logout">
+            
         </div>
         <div class="body">
             <div class="mainContent">
@@ -56,6 +59,12 @@
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="public/app.js"></script>
+<script>
+    if(document.cookie==null){
+    window.location.replace('http://localhost:3003/login')
+}
+</script>
 </body>
 </html>

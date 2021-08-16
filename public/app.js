@@ -39,7 +39,7 @@ let syncBtn = document.getElementById("sync");
 let logs = document.getElementById("logs");
 let ytinputlink = document.getElementById("ytinputlink");
 
-/***************************************************************** SOCKET.IO ************************************************************/
+
 
 window.addEventListener("load", function (username) {
     username = localStorage.getItem('Name');
@@ -52,7 +52,15 @@ window.addEventListener("load", function (username) {
     console.log('identity set to: ' + identity);
 });
 
+document.getElementById("logoutImg").addEventListener("click", function () {
 
+    localStorage.removeItem('Name');
+    //socket.emit('logoutLog', identity);
+    if (localStorage.getItem('Name')==null) {
+        window.location.replace("http://localhost:3003/login")
+    }
+    console.log('identity emitted')
+});
 
 window.addEventListener("load", function (e) {
     e.preventDefault();
