@@ -22,13 +22,6 @@ body {
         .mainContent {
             border-right: 1px solid black;
         }
-            .player{
-                width: 90%;
-                height:65%;
-                margin-top: 3px;
-                margin-left: 10px;
-                border: solid 4px;
-            }
             .controls {
                 margin-left: 15px;
             }

@@ -2,7 +2,6 @@
 let username;
 let identity;
 let socket = io();
-let videoIdentity = prompt("Please enter the video ID", "U6RTV7eNrj4");
 let firebaseConfig = {
     apiKey: "AIzaSyA_IqKvFoEP78YY5SzU0S1eRIi1y-dyQvw",
     authDomain: "learnfirebase-8bf03.firebaseapp.com",
@@ -14,11 +13,8 @@ let firebaseConfig = {
     measurementId: "G-5VCE2R946Z"
 };
 let controlIdentity = localStorage.getItem('Name');
-//let videoIdRefined = videoIdentity;
 let messageBox = document.getElementById("message");
-let tag = document.createElement('script');
-let firstScriptTag = document.getElementsByTagName('script')[0];
-let player;
+
 let printStatus = document.getElementById('status');
 let pause = document.getElementById("pause");
 let play = document.getElementById("play");
@@ -55,8 +51,7 @@ window.addEventListener("load", function (username) {
 document.getElementById("logoutImg").addEventListener("click", function () {
 
     localStorage.removeItem('Name');
-    //socket.emit('logoutLog', identity);
-    if (localStorage.getItem('Name')==null) {
+    if (localStorage.getItem('Name') == null) {
         window.location.replace("http://localhost:3003/login")
     }
     console.log('identity emitted')
@@ -73,6 +68,7 @@ window.addEventListener("load", function (e) {
         scrollToBottom('messageModule');
     }, 2500);
 });
+
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 socket.on('seekPlus5', (seekPlus5, plus5Press) => {
     if (seekPlus5 == 'seekPlus5') {
@@ -134,7 +130,7 @@ socket.on('tenthPart', (tenthPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        
+
         tenthPartfn();
     }
 });
@@ -143,7 +139,7 @@ socket.on('thirtiethPart', (thirtiethPart, percentSeekLog) => {
         let html;
         html = "<li>" + percentSeekLog + "</li>";
         logs.innerHTML += html;
-        
+
         thirtiethPartfn();
     }
 });
@@ -196,14 +192,12 @@ socket.on('syncTime', (syncTime, syncPress) => {
 socket.on('consoleData', (consoleData, user) => {
     console.log('datareceived')
 
-    // let html = "";
-    // html += "<li id='log-messages'><b>"+consoleData+"<b></br>";
     let connectedUsers = "";
     connectedUsers = printObj(user);
     document.getElementById("connectedUsers").innerHTML = "<li>" + connectedUsers + "</li>";
-    // document.getElementById("logs").innerHTML += html;
+    
     function printObj(user) {
-        console.log('  printUser fncalled')
+        console.log('printUser fncalled')
         var string = '';
         for (var key in user) {
             if (typeof user[key] == 'string') {
@@ -250,34 +244,65 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 
 /*********************************************************** YOUTUBE ********************************************************************/
 
-document.getElementById("player").src = "https://www.youtube.com/embed/" + videoIdentity + "?enablejsapi=1&autoplay=1"; //&autoplay=1
-console.log('video idetity set to:' + videoIdentity)
-tag.id = 'iframe-demo';
-tag.src = 'https://www.youtube.com/iframe_api';
+ytinputlink.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        createPlayerr(ytinputlink.value);
+    }
+})
 
+
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-function onYouTubeIframeAPIReady() {
-    console.log("player loaded")
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function createPlayerr(vid) {
+    console.log('createPlayerStart')
+    var playerWrapper = document.getElementById('playerWrapper');
+
+    var playerDiv = document.getElementById("player");
+    playerDiv.remove();
+    console.log('playerRemoved')
+
+    var newPlayerDiv = document.createElement("DIV");
+    newPlayerDiv.id = "player";
+    newPlayerDiv.style="height:450px; width: 95%; margin-top: 3px; margin-left: 10px; border: solid 4px;"
+    playerWrapper.appendChild(newPlayerDiv);
+    
     player = new YT.Player('player', {
+        videoId: vid,
+        playerVars: {
+            'playsinline': 1
+        },
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
+
     });
+    console.log('createPlayerEnd')
+   // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+
+
+        }
+    }
 }
 
-// ytinputlink.addEventListener('keypress', function (e) {
-//     console.log('ytinputlink event invoked')
-//     if (e.key === 'Enter') {
-//         if (videoIdRefined.includes('https://www.youtube.com/watch?v=')) {
-//             videoIdRefined = videoIdentity.substring(32, 44);
-//             console.log(videoIdRefined);
-//         }
-//     }
-// });
-
-
+/****************************************************************************** */
 syncBtn.addEventListener("click", function () {
     console.log('sync event invoked')
     let syncTime = Math.round(player.getCurrentTime());

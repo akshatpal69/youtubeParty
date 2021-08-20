@@ -13,14 +13,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <input type="text" disabled id="ytinputlink" 
-            class="ytinputlink" value="youtubePartyV1.0.3_Beta" name="ytinputlink" >
+            <input type="text"  id="ytinputlink" 
+            class="ytinputlink" placeholder="enter video link or playlist link [youtubePartyV1.0.3_Beta]" name="ytinputlink" >
             <input type="image"  id="logoutImg" class="logoutImg" src="/images/logout.png" alt="logout">
             
         </div>
         <div class="body">
             <div class="mainContent">
-                <iframe id="player" class="player" frameborder="0"></iframe>
+                <div id="playerWrapper">
+                    
+                    <div id="player"></div>
+                </div>
+               
                 <div class="controls">
                     <input type="image" title="Sync Video" src="images/sync.svg" style="height: 20px; width: 30px;" id="sync" name="sync">
                     <input type="image" title="Pause" src="/images/pause.svg" style="height: 20px; width: 30px;" id="pause" name="pause">
