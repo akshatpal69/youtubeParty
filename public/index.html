@@ -16,15 +16,12 @@
             <input type="text"  id="ytinputlink" 
             class="ytinputlink" placeholder="enter video link or playlist link [youtubePartyV1.0.3_Beta]" name="ytinputlink" >
             <input type="image"  id="logoutImg" class="logoutImg" src="/images/logout.png" alt="logout">
-            
         </div>
         <div class="body">
             <div class="mainContent">
                 <div id="playerWrapper">
-                    
                     <div id="player"></div>
                 </div>
-               
                 <div class="controls">
                     <input type="image" title="Sync Video" src="images/sync.svg" style="height: 20px; width: 30px;" id="sync" name="sync">
                     <input type="image" title="Pause" src="/images/pause.svg" style="height: 20px; width: 30px;" id="pause" name="pause">
@@ -53,11 +50,9 @@
                 <ul class="messages" id="messages"></ul>
                 <input type="text" class="messageInputBox" id="message" placeholder="Enter message" autocomplete="off">
             </div>
-
             <div class="logs-wrapper" id="logs-wrapper">
                 <ul class="logs" id="logs"></ul>
             </div>
-
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
@@ -65,10 +60,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="public/app.js"></script>
-<script>
-    if(document.cookie==null){
-    window.location.replace('http://localhost:3003/login')
-}
-</script>
+
 </body>
 </html>

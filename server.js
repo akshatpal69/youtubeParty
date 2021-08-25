@@ -6,8 +6,6 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const port = process.env.PORT || 3003;
 
-
-
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/public/login.html');
 });
@@ -88,6 +86,10 @@ io.on('connection', (socket) => {
     socket.on('syncTime', (syncTime, syncPress) => {
         io.emit('syncTime', syncTime, syncPress);
     });
+    socket.on('vidFromClient', (vidFromClient)=>{
+        console.log(vidFromClient)
+        io.emit('vidFromServer', vidFromClient)
+    })
 });
 
 server.listen(port, () => {

@@ -209,6 +209,9 @@ socket.on('consoleData', (consoleData, user) => {
         }
         return string;
     }
+});
+socket.on('sanitisedVidServer',(sanitisedVidServer)=>{
+    ytinputlink.value = sanitisedVidServer;
 })
 /********************************************************* FIREBASE *******************************************************************/
 
@@ -220,7 +223,6 @@ messageBox.addEventListener('keypress', (e) => {
         console.log('enter pressed')
         let message = document.getElementById("message").value;
         scrollToBottom('messageModule');
-
         // save in database
         firebase.database().ref("messages").push().set({
             "sender": identity,
@@ -231,7 +233,7 @@ messageBox.addEventListener('keypress', (e) => {
         return false;
     }
 });
-
+console.log(window.location.href);
 // listen for incoming messages
 firebase.database().ref("messages").on("child_added", function (snapshot) {
     let html = "";
@@ -246,10 +248,16 @@ firebase.database().ref("messages").on("child_added", function (snapshot) {
 
 ytinputlink.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        createPlayerr(ytinputlink.value);
+        socket.emit('vidFromClient', ytinputlink.value);
+        console.log('VID from client emitted')
     }
 })
-
+socket.on('vidFromServer',(vidFromServer)=>{
+    console.log('serverVIDreceived');
+    console.log(vidFromServer+" server");
+    ytinputlink.value = vidFromServer;
+    createPlayer(vidFromServer);
+})
 
 var tag = document.createElement('script');
 
@@ -260,8 +268,22 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player;
-function createPlayerr(vid) {
+function createPlayer(vid) {
     console.log('createPlayerStart')
+    let sanitisedVid;
+    if(vid.includes("https://www.youtube.com/watch?v=")){
+       sanitisedVid = vid.substring(32, 43);
+       console.log(sanitisedVid)
+    }if(vid.includes("https://youtu.be/")){
+        sanitisedVid = vid.substring(17, 28);
+        console.log(sanitisedVid)
+     }if(!vid.includes("https://youtu.be/") && !vid.includes("https://www.youtube.com/watch?v=")){
+         sanitisedVid = vid
+         console.log(sanitisedVid)
+      }//if(vid.includes("https://www.youtube.com/playlist?list=")){
+    //     sanitisedVid = vid.substring(38, 73);
+    //     console.log(sanitisedVid)
+    // }
     var playerWrapper = document.getElementById('playerWrapper');
 
     var playerDiv = document.getElementById("player");
@@ -274,7 +296,7 @@ function createPlayerr(vid) {
     playerWrapper.appendChild(newPlayerDiv);
     
     player = new YT.Player('player', {
-        videoId: vid,
+        videoId: sanitisedVid,
         playerVars: {
             'playsinline': 1
         },
@@ -290,9 +312,7 @@ function createPlayerr(vid) {
         event.target.playVideo();
     }
 
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
+   
     var done = false;
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
