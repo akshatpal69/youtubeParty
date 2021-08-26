@@ -254,7 +254,7 @@ ytinputlink.addEventListener('keypress', (e) => {
 })
 socket.on('vidFromServer',(vidFromServer)=>{
     console.log('serverVIDreceived');
-    console.log(vidFromServer+" server");
+    console.log(vidFromServer);
     ytinputlink.value = vidFromServer;
     createPlayer(vidFromServer);
 })
@@ -265,8 +265,6 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
 var player;
 function createPlayer(vid) {
     console.log('createPlayerStart')
