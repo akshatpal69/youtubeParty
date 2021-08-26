@@ -302,7 +302,6 @@ function createPlayer(vid) {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
-
     });
     console.log('createPlayerEnd')
    // 4. The API will call this function when the video player is ready.
