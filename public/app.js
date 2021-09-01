@@ -210,12 +210,13 @@ socket.on('consoleData', (consoleData, user) => {
         return string;
     }
 });
+ytinputlink.value = "https://www.youtube.com/watch?v=6F9fP-X8K4c&ab_channel=Canoe"
 socket.on('sanitisedVidServer',(sanitisedVidServer)=>{
     ytinputlink.value = sanitisedVidServer;
 })
 /********************************************************* FIREBASE *******************************************************************/
 
-
+window.onload()
 firebase.initializeApp(firebaseConfig);
 
 messageBox.addEventListener('keypress', (e) => {
@@ -309,7 +310,6 @@ function createPlayer(vid) {
         event.target.playVideo();
     }
 
-   
     var done = false;
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
