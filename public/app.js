@@ -70,12 +70,12 @@ window.addEventListener("load", function (e) {
 });
 
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-socket.on(startVibration,(startvib)=>{
+socket.on('startVibration',(startvib)=>{
     if (navigator.vibrate && startvib == 'start') {
         window.navigator.vibrate(500000);
     }
 })
-socket.on(stopVibration,(stopvib)=>{
+socket.on('stopVibration',(stopvib)=>{
     if (navigator.vibrate && stopvib == 'stop') {
         window.navigator.vibrate(0);
     }
