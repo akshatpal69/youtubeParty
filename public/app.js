@@ -70,13 +70,13 @@ window.addEventListener("load", function (e) {
 });
 
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-socket.on(startVibration,()=>{
-    if (navigator.vibrate) {
+socket.on(startVibration,(startvib)=>{
+    if (navigator.vibrate && startvib == 'start') {
         window.navigator.vibrate(500000);
     }
 })
-socket.on(stopVibration,()=>{
-    if (navigator.vibrate) {
+socket.on(stopVibration,(stopvib)=>{
+    if (navigator.vibrate && stopvib == 'stop') {
         window.navigator.vibrate(0);
     }
 })
@@ -345,10 +345,10 @@ function createPlayer(vid) {
 
 /************************************event listeners****************************************** */
 document.getElementById('vibrate-on').addEventListener('click', ()=>{
-    socket.emit('startVibration');
+    socket.emit('startVibration', 'start');
 })
 document.getElementById('vibrate-off').addEventListener('click', ()=>{
-    socket.emit('stopVibration');
+    socket.emit('stopVibration', 'stop');
 })
 
 syncBtn.addEventListener("click", function () {

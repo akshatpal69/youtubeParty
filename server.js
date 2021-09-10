@@ -40,11 +40,11 @@ io.on('connection', (socket) => {
         delete user[naam];
         io.emit('consoleData', consoleData, user);
     });
-    socket.on('startVibration', () => {
-        io.emit('startVibration')
+    socket.on('startVibration', (startvib) => {
+        io.emit('startVibration',startvib)
     });
-    socket.on('stopVibration', () => {
-        io.emit('stopVibration')
+    socket.on('stopVibration', (stopvib) => {
+        io.emit('stopVibration', stopvib)
     });
     socket.on('seekPlus5', (seekPlus5, plus5Press) => {
         io.emit('seekPlus5', seekPlus5, plus5Press)
