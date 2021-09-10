@@ -71,10 +71,14 @@ window.addEventListener("load", function (e) {
 
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 socket.on(startVibration,()=>{
-    startVibration();
+    if (navigator.vibrate) {
+        window.navigator.vibrate(500000);
+    }
 })
 socket.on(stopVibration,()=>{
-    stopVibration();
+    if (navigator.vibrate) {
+        window.navigator.vibrate(0);
+    }
 })
 
 
@@ -541,13 +545,11 @@ function scrollToBottom(id) {
     div.scrollTop = div.scrollHeight - div.clientHeight;
     console.log('scrollToBottom executed');
 }
-function startVibration(){
-    if (navigator.vibrate) {
-        window.navigator.vibrate(500000);
-    }
-}
-function stopVibration(){
-    if (navigator.vibrate) {
-        window.navigator.vibrate(0);
-    }
-}
+// function startVibration(){
+    
+// }
+// function stopVibration(){
+//     if (navigator.vibrate) {
+//         window.navigator.vibrate(0);
+//     }
+// }
