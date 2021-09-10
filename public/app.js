@@ -233,6 +233,9 @@ firebase.initializeApp(firebaseConfig);
 messageBox.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         console.log('enter pressed')
+        if (navigator.vibrate) {
+            window.navigator.vibrate(200);
+        }
         let message = document.getElementById("message").value;
         scrollToBottom('messageModule');
         // save in database
