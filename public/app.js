@@ -78,6 +78,17 @@ socket.on('seekPlus5', (seekPlus5, plus5Press) => {
         plus5fn();
     }
 });
+
+// socket.on('buttonControl', (buttonControlEvent, buttonControlLog) => {
+//     if (buttonControlEvent == 'seekPlus5') {
+//         let html;
+//         html = "<li>" + plus5Press + "</li>";
+//         logs.innerHTML += html;
+//         plus5fn();
+//     }
+// });
+
+
 socket.on('seekPlus10', (seekPlus10, plus10Press) => {
     if (seekPlus10 == 'seekPlus10') {
         let html;
@@ -216,7 +227,7 @@ socket.on('sanitisedVidServer',(sanitisedVidServer)=>{
 })
 /********************************************************* FIREBASE *******************************************************************/
 
-window.onload()
+
 firebase.initializeApp(firebaseConfig);
 
 messageBox.addEventListener('keypress', (e) => {
