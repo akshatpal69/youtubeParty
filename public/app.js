@@ -332,7 +332,12 @@ function createPlayer(vid) {
 }
 
 /****************************************************************************** */
-document.getElementById('vibrate').addEventListener('click', ()=>{
+document.getElementById('vibrate-on').addEventListener('click', ()=>{
+    if (navigator.vibrate) {
+        window.navigator.vibrate(500000);
+    }
+})
+document.getElementById('vibrate-off').addEventListener('click', ()=>{
     if (navigator.vibrate) {
         window.navigator.vibrate(0);
     }
