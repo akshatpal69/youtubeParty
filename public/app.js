@@ -70,6 +70,14 @@ window.addEventListener("load", function (e) {
 });
 
 /////////////////////////////////////////////////////////CONTROL BUTTONS EVENTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+socket.on(startVibration,()=>{
+    startVibration();
+})
+socket.on(stopVibration,()=>{
+    stopVibration();
+})
+
+
 socket.on('seekPlus5', (seekPlus5, plus5Press) => {
     if (seekPlus5 == 'seekPlus5') {
         let html;
@@ -331,16 +339,12 @@ function createPlayer(vid) {
     }
 }
 
-/****************************************************************************** */
+/************************************event listeners****************************************** */
 document.getElementById('vibrate-on').addEventListener('click', ()=>{
-    if (navigator.vibrate) {
-        window.navigator.vibrate(500000);
-    }
+    socket.emit('startVibration');
 })
 document.getElementById('vibrate-off').addEventListener('click', ()=>{
-    if (navigator.vibrate) {
-        window.navigator.vibrate(0);
-    }
+    socket.emit('stopVibration');
 })
 
 syncBtn.addEventListener("click", function () {
@@ -536,4 +540,14 @@ function scrollToBottom(id) {
     let div = document.getElementById(id);
     div.scrollTop = div.scrollHeight - div.clientHeight;
     console.log('scrollToBottom executed');
+}
+function startVibration(){
+    if (navigator.vibrate) {
+        window.navigator.vibrate(500000);
+    }
+}
+function stopVibration(){
+    if (navigator.vibrate) {
+        window.navigator.vibrate(0);
+    }
 }
